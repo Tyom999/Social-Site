@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="P-container">
+  <h1>Messages</h1>
+  <div  #scrollMe class="P-messages">
+      <div
+        *ngFor="let msg of messages"
+      >
+        <p
+          class="messages"
+          (click)="rateMsg(msg)"
+        >
+          {{(userId === msg.fromId)? "you :" : 'friend :'}} {{msg.message}}
+        </p>
+        <div class="rate" *ngIf="msg.id === msgId" >
+          <p (click)="setNewRate(rate.rating)"  [className]="rating === rate.rating? 'bold': ''" *ngFor="let rate of rateArray">{{rate.rating}}</p>
+        </div>
+      </div>
+  </div>
+
+  <div class="P-container-textarea">
+    <textarea class="msg" (click)="readMessage()" (keyup.enter)="sendMessage()" placeholder="Send a message..." [(ngModel)]="message"  cols="30" rows="10"></textarea>
+    <button (click)="sendMessage()"  [class.G-disabled]="!message" >Send</button>
+  </div>
+</div>

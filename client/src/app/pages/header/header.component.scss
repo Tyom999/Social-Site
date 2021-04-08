@@ -1,0 +1,20 @@
+.P-container {
+  width: 100%;
+  .P-container-header {
+    margin-left: 10px;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button{
+      width: 100px;
+      background-color: #1172e7;
+      border-radius: 3px;
+      color: white;
+    }
+    h1 {
+      cursor: pointer;
+      padding-left: 5px;
+    }
+  }
+}

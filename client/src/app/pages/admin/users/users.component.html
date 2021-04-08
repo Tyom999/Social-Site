@@ -1,0 +1,16 @@
+<app-header></app-header>
+<div class="P-container">
+
+
+
+  <div class="P-posts" >
+    <div class="P-post" *ngFor="let user of users; let idx = index" >
+      <p>User: {{user.nickname}}</p>
+      <p>Direction: </p>
+      <button (click)="onBlock(user.id, user.isBlocked, idx)">{{user.isBlocked? "UnBlock" : "Block"}}</button>
+    </div>
+  </div>
+
+
+</div>
+

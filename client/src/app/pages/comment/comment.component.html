@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="P-container">
+
+  <div class="comments" #scrollMe>
+    <div  *ngFor="let comment of comments">
+      <p>{{comment.nickname}}: {{comment.comment}} </p>
+      <p class="replyBtn" (click)="reply(commentContent, comment.id)">Reply</p>
+    </div>
+  </div>
+  <div class="addComment">
+    <textarea class="msg" placeholder="Add comment..." [(ngModel)]="newComment"  cols="30" rows="10"></textarea>
+    <button class="answerBtn" [disabled]="!newComment" (click)="addComment()">Enter</button>
+  </div>
+
+
+
+  <ng-template #commentContent let-c="close" let-d="dismiss" class="comments">
+    <div class="modal-body" *ngIf="replies.length > 0">
+      <div  *ngFor="let reply of replies">
+        <p>{{reply.nickname}}: {{reply.reply}} </p>
+      </div>
+    </div>
+    <div class="addComment">
+      <input type="text" [(ngModel)]="newReplyComment" placeholder="Add comment...">
+      <button class="answerBtn" [disabled]="!newReplyComment" (click)="addReplyComment()">Enter</button>
+    </div>
+    <div class="modal-footer">
+      <button type="button"  (click)="c('Save click')">Close</button>
+    </div>
+  </ng-template>
+
+</div>

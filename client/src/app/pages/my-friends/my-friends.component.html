@@ -1,0 +1,14 @@
+<app-header></app-header>
+<div class="P-container">
+  <h1>Friends</h1>
+  <div class="P-posts" *ngIf="friends.length > 0; else noFriends" >
+    <div class="P-post" *ngFor="let friend of friends">
+      <p>User: {{userId === friend.user1Id? friend.user2Id : friend.user1Id}}</p>
+      <button (click)="writeMsg(friend)">Write a message</button>
+    </div>
+  </div>
+
+  <ng-template class="noFriends" #noFriends>
+    <h1 >You don't have friends</h1>
+  </ng-template>
+</div>

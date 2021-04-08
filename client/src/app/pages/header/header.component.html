@@ -1,0 +1,10 @@
+<div class="P-container">
+  <div class="P-container-header">
+    <h1 *ngIf="router.url.includes('posts')" (click)="reloadPage()" >Social Site</h1>
+    <h1 *ngIf="!router.url.includes('posts')" [routerLink]="['', 'posts']" >Social Site</h1>
+    <button *ngIf="router.url.includes('login')" [routerLink]="['', 'register']">Registration</button>
+    <button *ngIf="router.url.includes('register')"  [routerLink]="['', 'login']">Login</button>
+    <button *ngIf="!router.url.includes('register') && !router.url.includes('login')" [routerLink]="['', 'login']" (click)="logout()">Logout</button>
+  </div>
+
+</div>

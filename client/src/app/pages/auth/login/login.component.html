@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="P-container" *ngIf="isValid; else loading">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <h2>Login</h2>
+      <h4>{{errorMsg}}</h4>
+      <input  type="text" placeholder="Nickname" formControlName="nickname"/>
+      <div *ngIf="form.get('nickname').errors && form.get('nickname').touched">
+        <p class="error" *ngIf="form.get('nickname').errors.required">The Nickname field is required</p>
+        <p class="error" *ngIf="form.get('nickname').errors.minlength"
+        >
+          The Nickname should be equal or more 3
+        </p>
+      </div>
+      <input  type="password"  placeholder="Password" formControlName="password"/>
+      <div *ngIf="form.get('password').errors && form.get('password').touched">
+        <p class="error" *ngIf="form.get('password').errors.required">The Password field is required</p>
+        <p class="error" *ngIf="(form.get('password').errors.minlength?.requiredLength) <
+         form.get('password').errors.minlength?.actualLength"
+        >
+          The Password should be equal or more 6
+        </p>
+      </div>
+      <button type="submit" [disabled]="form.invalid">Login</button>
+    </form>
+
+</div>
+
+<ng-template #loading>
+  <h1  class="P-container">Loading...</h1>
+</ng-template>
+
+

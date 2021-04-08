@@ -1,0 +1,42 @@
+<app-header></app-header>
+<div class="P-container"  *ngIf="isValid; else loading">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <h2>Registration</h2>
+    <h4>{{errorMsg}}</h4>
+    <input  type="text" placeholder="Nickname" formControlName="nickname"/>
+    <div *ngIf="form.get('nickname').errors && form.get('nickname').touched">
+      <p class="error" *ngIf="form.get('nickname').errors.required">The Nickname field is required</p>
+      <p class="error" *ngIf="form.get('nickname').errors.minlength"
+      >
+        The Nickname should be equal or more 3
+      </p>
+    </div>
+
+    <input  type="password"  placeholder="Password" formControlName="password"/>
+    <div *ngIf="form.get('password').errors && form.get('password').touched">
+      <p class="error" *ngIf="form.get('password').errors.required">The Password field is required</p>
+      <p class="error" *ngIf="form.get('password').errors.minlength">
+        The Password should be equal or more 6
+      </p>
+    </div>
+
+    <input type="password"  placeholder="Confirm password" formControlName="confirmPassword"/>
+    <div *ngIf="form.get('confirmPassword').errors && form.get('confirmPassword').touched">
+      <p class="error" *ngIf="form.get('confirmPassword').errors.required">The Password field is required</p>
+      <p class="error" *ngIf="form.get('confirmPassword').errors.minlength">
+      <p class="error" *ngIf="form.get('password').value !== form.get('confirmPassword').value">
+        The confirm password should be equal password
+      </p>
+    </div>
+
+    <button type="submit"
+            [disabled]="form.get('confirmPassword').value !== form.get('password').value && form.invalid"
+    >Registration</button>
+  </form>
+</div>
+
+
+
+<ng-template #loading>
+  <h1  class="P-container">Loading...</h1>
+</ng-template>

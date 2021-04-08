@@ -1,0 +1,9 @@
+<app-header></app-header>
+<div class="P-container">
+  <div class="P-container-textarea">
+    <h1>Add a Post</h1>
+    <input type="text" placeholder="Title" [(ngModel)]="title">
+    <textarea class="description" placeholder="Description" [(ngModel)]="description" cols="30" rows="10"></textarea>
+    <button [class.G-disabled]="!(description && title)" (click)="addPost()"  [disabled]="!description && !title">Add</button>
+  </div>
+</div>

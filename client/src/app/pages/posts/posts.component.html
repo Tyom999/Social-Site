@@ -1,0 +1,61 @@
+<app-header></app-header>
+
+<div class="P-container">
+  <div class="options">
+    <button [routerLink]="['', 'add-post']">Add a post</button>
+    <button (click)="myFriends()">My Friends</button>
+    <div>
+      <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-body" *ngIf="notifications.length > 0; else notificationsEmpty">
+          <div  *ngFor="let notification of notifications">
+            <p>Do you want to add friend user with {{notification.user1Id}} id?</p>
+            <button class="answerBtn" (click)="answerQuestion(true, notification.user1Id)">Yes</button>
+            <button class="answerBtn" (click)="answerQuestion(false, notification.user1Id)">No</button>
+          </div>
+        </div>
+        <ng-template  class="modal-body" #notificationsEmpty>
+          <h4>There is not notifications.</h4>
+        </ng-template>
+        <div class="modal-footer">
+          <button type="button"  (click)="c('Save click')">Close</button>
+        </div>
+      </ng-template>
+
+      <button  (click)="open(content)">Notifications {{notifications.length}}</button>
+    </div>
+  </div>
+  <div class="P-search">
+    <label for="typeahead-basic">Search People</label>
+    <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="search" />
+
+    <button (click)="onSearch()" [class.G-disabled]="!search"  [disabled]="!search">Search</button>
+  </div>
+
+  <div class="P-posts" *ngIf="!userToggle" >
+      <div class="P-post" *ngFor="let post of posts">
+        <p><b>Nickname</b>: {{post.nickname}}</p>
+        <p><b>Date</b>: {{post.updatedAt | date : 'dd:MM:yyyy'}}</p>
+        <p><b>Title:</b> {{ post.title}}</p>
+        <p><b>Description</b></p>
+        <p class="description">{{post.description}}</p>
+        <button (click)="openComment(post.id)">Comment</button>
+      </div>
+  </div>
+
+
+  <div>
+     <div class="P-posts" *ngIf="userToggle" >
+       <div *ngIf="users.length > 0; else noResult">
+         <div class="P-searched-users" *ngFor="let user of users">
+           <p><b>NickName</b>: {{user.nickname}}</p>
+           <button  (click)="addFriend(user.id)">Add Friend</button>
+         </div>
+       </div>
+
+       <ng-template #noResult>
+        <h1> No result</h1>
+       </ng-template>
+  </div>
+</div>
+
+</div>
